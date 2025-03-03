@@ -3,8 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Generator By FZBillinG</title>
+    <meta name="description" content="Generate QR codes for free with FZBillinG's QR Generator. Create custom QR codes for URLs, text, and more in seconds.">
+    <meta name="keywords" content="QR Generator, Free QR Code, QR Code Creator, QR Code Maker, QR Code Online">
+    <meta name="author" content="FZBillinG">
+    <meta property="og:title" content="QR Generator By FZBillinG">
+    <meta property="og:description" content="Generate QR codes for free with FZBillinG's QR Generator. Create custom QR codes for URLs, text, and more in seconds.">
+    <meta property="og:image" content="https://qrgenrator.fzbilling.tech/images/FZBillinG-Logo.png">
+    <meta property="og:url" content="https://qrgenrator.fzbilling.tech">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="QR Generator By FZBillinG">
+    <meta name="twitter:description" content="Generate QR codes for free with FZBillinG's QR Generator. Create custom QR codes for URLs, text, and more in seconds.">
+    <meta name="twitter:image" content="https://qrgenrator.fzbilling.tech/images/FZBillinG-Logo.png">
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "QR Generator By FZBillinG",
+        "description": "Generate QR codes for free with FZBillinG's QR Generator. Create custom QR codes for URLs, text, and more in seconds.",
+        "url": "https://qrgenrator.fzbilling.tech",
+        "image": "https://qrgenrator.fzbilling.tech/images/FZBillinG-Logo.png",
+        "applicationCategory": "Utility",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <title>QR Generator By FZBillinG - Free QR Code Creator</title>
     <style>
+        /* Existing CSS styles */
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
@@ -50,7 +82,7 @@
             font-size: 1.8rem;
         }
 
-        input, button {
+        input, button, select {
             width: 100%;
             padding: 12px;
             margin-bottom: 15px;
@@ -63,7 +95,7 @@
             background-color: #f5f3f0; /* Off-white background */
         }
 
-        input:focus {
+        input:focus, select:focus {
             border-color: #4e342e; /* Coffee focus */
             outline: none;
         }
@@ -156,7 +188,7 @@
                 margin-bottom: 20px;
             }
 
-            button, input {
+            button, input, select {
                 font-size: 16px;
                 padding: 14px;
             }
@@ -176,7 +208,7 @@
 <body>
 
     <!-- Centered Logo at the Top -->
-    <img src="images/FZBillinG Logo.png" alt="Restaurant Logo" class="logo">
+    <img src="images/FZBillinG-Logo.png" alt="FZBillinG Logo" class="logo">
 
     <div class="container">
         <div class="form-section">
@@ -184,6 +216,12 @@
             <form id="qrForm">
                 <input type="url" id="linkInput" placeholder="Enter URL (https://example.com)" required>
                 <input type="number" id="sizeInput" placeholder="QR Code Size (e.g., 200)" min="100" max="500" value="200">
+                <select id="colorInput">
+                    <option value="#000000">Black</option>
+                    <option value="#FF0000">Red</option>
+                    <option value="#00FF00">Green</option>
+                    <option value="#0000FF">Blue</option>
+                </select>
                 <button type="submit">Generate QR Code</button>
             </form>
         </div>
@@ -208,19 +246,19 @@
 
             const link = document.getElementById('linkInput').value;
             const size = parseInt(document.getElementById('sizeInput').value);
+            const color = document.getElementById('colorInput').value;
 
             const qrContainer = document.getElementById('qrcodeImage');
             qrContainer.innerHTML = ""; // Clear previous QR code
 
             const qrCode = new QRCode(qrContainer, {
-    text: link,
-    width: size,
-    height: size,
-    colorDark: "#000000", /* Black color for the QR code */
-    colorLight: "#ffffff", /* White background */
-    correctLevel: QRCode.CorrectLevel.H
-});
-
+                text: link,
+                width: size,
+                height: size,
+                colorDark: color,
+                colorLight: "#ffffff", /* White background */
+                correctLevel: QRCode.CorrectLevel.H
+            });
 
             document.getElementById('qrcode').style.display = "block";
 
